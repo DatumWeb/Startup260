@@ -8,10 +8,10 @@ Most people struggle to learn and understand the complex game of Canasi. This ap
 
 ### Sketch
 This is a rough sketch of the Intro Page, talking about what Canasi is and how to play Baby Canasi.
-<img src="https://github.com/DatumWeb/Startup260/assets/97472760/139ebc17-ab7e-4dbd-8653-07f3a405d58e.jpg" width="50%" height="50%")
+![](https://github.com/DatumWeb/Startup260/assets/97472760/139ebc17-ab7e-4dbd-8653-07f3a405d58e.jpg)
 
 This is a rough sketch of what Baby Canasi will look like while you are playing it.
-![Baby Canasi board with cards on bottom.](https://github.com/DatumWeb/Startup260/assets/97472760/d23d393b-76ce-4528-84d2-9790b11eabad | width=50%)
+![Baby Canasi board with cards on bottom.](https://github.com/DatumWeb/Startup260/assets/97472760/d23d393b-76ce-4528-84d2-9790b11eabad)
 
 ### Key Features
 
