@@ -31,7 +31,7 @@ This is a rough sketch of what Baby Canasi will look like while you are playing 
 
 ***Service*** - endpoints for login, game outcomes, and player scores.
 
-***Database*** - This will store user info, and save scores for leaderboard. 
+***Database*** - This will store user info, and save scores for the leaderboard. 
 
 ***WebSocket*** - This will generate recent scores from users.
 
