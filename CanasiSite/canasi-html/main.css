@@ -3,6 +3,12 @@
     font: sans-serif;
 }
 
+body {
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+}
+
 header {
     background: darkolivegreen;
 }
