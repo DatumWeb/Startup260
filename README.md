@@ -35,5 +35,23 @@ This is a rough sketch of what Baby Canasi will look like while you are playing 
 
 ***WebSocket*** - This will generate recent scores from users.
 
-***React*** - Will be ported to React framework
+***React*** - Will be ported to React framework.
+
+## HTML Deliverable
+
+https://startup.canasigame.com
+
+***HTML Pages*** - I created 4 HTML pages, Home/login, how to play, the game, and a score page.
+
+***Text*** - There is text throughout to provide context to actions, then much more text to explain the game.
+
+***Links*** - There are links in the Nav bar to navigate through the page.
+
+***Images*** - There are images to represent the board, and pieces that will be on the board.
+
+***DB/Login*** - Input box to login with password and username, there will be input for the game as well.
+
+***WebSocket*** - The turns will be realtime and the scores will be uploaded.
+
+***Third Party*** - There will be a random quote generator.
 
