@@ -3,12 +3,16 @@
     font: sans-serif;
 }
 
-body {
+main {
     display: flex;
     flex-direction: column;
     min-width: 300px;
 }
-
+.navbar-center {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+}
 header {
     background: darkolivegreen;
 }
