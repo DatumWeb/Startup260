@@ -10,6 +10,8 @@ main {
     justify-content: center;
     height: 100vh;
     font-size: large;
+    color: #262626;
+    overflow: hidden;
 }
 .navbar-center {
     display: flex;
@@ -31,4 +33,27 @@ main {
     width: 200px;
     align-items: center;
     justify-content: center;
+}
+
+.real-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #767676;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #262626;
+    font-size: medium;
+
+}
+
+#footer-name {
+    margin-left: auto;
+}
+
+#github-link {
+    color: black;
 }
