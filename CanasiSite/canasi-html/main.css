@@ -8,7 +8,6 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
     font-size: large;
     color: #262626;
     overflow: hidden;
@@ -21,6 +20,10 @@ main {
 
 .large-header {
     font-size: 6rem;
+}
+
+.largeless-header {
+    font-size: 4rem;
 }
 
 .form-container {
@@ -56,4 +59,24 @@ main {
 
 #github-link {
     color: black;
+}
+
+
+.username {
+    text-align: center;
+    justify-content: center;
+    font-size: larger;
+}
+
+.stats {
+    text-align: center;
+    justify-content: center;
+}
+
+#wins {
+    color: green;
+}
+
+#losses {
+    color: red;
 }
