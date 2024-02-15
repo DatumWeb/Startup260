@@ -6,13 +6,29 @@
 main {
     display: flex;
     flex-direction: column;
-    min-width: 300px;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    font-size: large;
 }
 .navbar-center {
     display: flex;
     justify-content: center;
     margin: 0 auto;
 }
-header {
-    background: darkolivegreen;
+
+.large-header {
+    font-size: 6rem;
+}
+
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.custom-form {
+    width: 200px;
+    align-items: center;
+    justify-content: center;
 }
