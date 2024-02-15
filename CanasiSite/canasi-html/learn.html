@@ -26,7 +26,8 @@
               </nav>
         </header>
 
-        <main>
+        <main class="container-fluid">
+          <div class="howTo-container">
             <h2 class="largeless-header text-center">What is Canasi</h2>
             <p>
                 Canasi is a complicated game involving many pieces, memorizing and advanced moves.
@@ -40,9 +41,13 @@
                 Each player has a "Scrivtre". Losing your Scrivtre piece will result in a loss, so it
                 is vital you protect yours while trying to eliminate the opponent's Scrivtre. 
             </p>
-
             <p>Scrivtre Piece:</p>
-            <div id="ScrivtreIMG" class="picture"><img width="200px" src="wolf.jpg" alt="Scrivtre piece" /></div>
+            <div id="scrivtreIMG" class="picture">
+              <img width="200px" src="wolf.jpg" alt="Scrivtre piece" />
+              <div class="overlay">
+                <p class="hidden-text">Scrivtre Piece</p>
+              </div>
+            </div>
 
             <h3>Memorizing</h3>
             <p>
@@ -59,7 +64,12 @@
                 The Silunai can be hit twice before being eliminated, while the Scrivtre can be hit 3 times.
             </p>
             <p>Silunai Piece:</p>
-            <div id="SilunaiIMG" class="picture"><img width="200px" src="crenentmoon.jpg" alt="Silunai piece" /></div>
+            <div id="SilunaiIMG" class="picture">
+              <img class="image" width="200px" src="crenentmoon.jpg" alt="Silunai piece" />
+              <div class="overlay">
+                <p class="hidden-text">Silunai</p>
+              </div>
+            </div>
 
             <h3>Gameplay Order</h3>
             <li>1. Decide who goes first.</li>
@@ -70,6 +80,7 @@
             <li>5. Declare your move 2 turns from now.</li>
             <li>6. Repeat 3-5 until the Scrivtre is eliminated or someone has performed  a move that was 
                 not declared.</li>
+          </div>
         </main>
 
 
