@@ -86,7 +86,10 @@ main {
     margin-right: 15%;
 }
 
+#SilunaiIMG,
 #scrivtreIMG {
+    width: 350px;
+    height: 350px;
     justify-content: center;
     align-items: center;
 }
@@ -120,4 +123,8 @@ main {
     color: #767676;
     font-size: 2em;
 
+}
+
+.howToPlay {
+    margin-bottom: 75px;
 }
