@@ -26,17 +26,12 @@
               </nav>
         </header>
 
-        <main>
-            <h2>Baby Canasi</h2>
-            <div id="username-container">
-                <p>You: <span id="your-username">Datum</span></p>
-                <p>VS</p>
-                <p>Them: <span id="opponent-username">Knight</span></p>
+        <main class="container-fluid">
+            <h2 class="largeless-header text-center">Baby Canasi</h2>
+            <div id="username-container" class="container-fluid text-center">
+                <p><span class="username" id="your-username">Datum</span> VS <span class="username" id="opponent-username">Knight</span></p>
             </div>
 
-            <div id="move-prompt">Declare your move for turn <span id="turn-number">1</span></div>
-            <div>THIS WILL BE THE BOARD</div>
-            <div id="BoardIMG" class="picture"><img width="200px" src="7x7.jpg" alt="Canasi board" /></div>
             <div class="board">
                 <div class="board-cell"></div>
                 <div class="board-cell"></div>
@@ -45,18 +40,7 @@
                 <div class="board-cell"></div>
                 <div class="board-cell"></div>
                 <div class="board-cell"></div>
-                <div class="board-cell"></div>
 
-                <div class="board-cell"></div>
-                <div class="board-cell"></div>
-                <div class="board-cell"></div>
-                <div class="board-cell"></div>
-                <div class="board-cell"></div>
-                <div class="board-cell"></div>
-                <div class="board-cell"></div>
-                <div class="board-cell"></div>
-
-                <div class="board-cell"></div>
                 <div class="board-cell"></div>
                 <div class="board-cell"></div>
                 <div class="board-cell"></div>
@@ -72,6 +56,13 @@
                 <div class="board-cell"></div>
                 <div class="board-cell"></div>
                 <div class="board-cell"></div>
+
+                <div class="board-cell"></div>
+                <div class="board-cell"></div>
+                <div class="board-cell"></div>
+                <div class="board-cell"></div>
+                <div class="board-cell"></div>
+                <div class="board-cell"></div>
                 <div class="board-cell"></div>
 
                 <div class="board-cell"></div>
@@ -81,7 +72,6 @@
                 <div class="board-cell"></div>
                 <div class="board-cell"></div>
                 <div class="board-cell"></div>
-                <div class="board-cell"></div>
 
                 <div class="board-cell"></div>
                 <div class="board-cell"></div>
@@ -90,9 +80,7 @@
                 <div class="board-cell"></div>
                 <div class="board-cell"></div>
                 <div class="board-cell"></div>
-                <div class="board-cell"></div>
 
-                <div class="board-cell"></div>
                 <div class="board-cell"></div>
                 <div class="board-cell"></div>
                 <div class="board-cell"></div>
@@ -101,11 +89,13 @@
                 <div class="board-cell"></div>
                 <div class="board-cell"></div>
             </div>
-            
-            <p>Opponet's move</p>
-            <div class="drawn-card">
-                THIS REPRESENTS THE DRAWN CARD
+            <div class="container-fluid" id="opponents-move">
+              <p>Opponet's move</p>
+              <div class="drawn-card">
+                  THIS REPRESENTS THE DRAWN CARD
+              </div>
             </div>
+            <div class="container-fluid text-center" id="move-prompt">Declare your move for turn <span id="turn-number">1</span></div>
 
             
 
