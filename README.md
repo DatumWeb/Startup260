@@ -55,3 +55,13 @@ https://startup.canasigame.com
 
 ***Third Party*** - There will be a random quote generator.
 
+## CSS Deliverable
+https://startup.canasigame.com
+
+***Header, footer, and main content body*** - There is a header, footer, and main elements, they are uniforly sylized.
+***Navigation elements*** - There is a nav bar with hyperlinks and styled at the top of each page. 
+***Responsive to window resizing*** - The nave bar, and images respond to smaller screens, and some adjustments were made when content was cut off because of it.
+***Application elements*** - There is good contrast with the black and white (and grey) elements are spaced nicely to make info clear.
+***Application text content*** - The fonts and font sizes are consistent and info clear.
+***Application images*** - Images are sized evenly and can be hovered over for info.
+
