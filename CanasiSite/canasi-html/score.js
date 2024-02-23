@@ -1,0 +1,7 @@
+function getWins {
+
+}
+
+function getLosses {
+    
+}
