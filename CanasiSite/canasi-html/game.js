@@ -6,8 +6,6 @@ function displayUsernames() {
 
     document.getElementById("your-username").innerText = yourUsername;
     document.getElementById("opponent-username").innerText = opponentUsername;
-
-
 }
 
 window.onload = function() {
@@ -16,46 +14,44 @@ window.onload = function() {
 };
 
 
-
 //Board JS
 function createBoard() {
     fullBoard = document.getElementById("full-board");
     numRows = 7;
     numColumns =7;
-    for (i = 0; i < numRows; i++) {
-        fullBoard.innerHTML += "<div class=\"board-cell\"></div>";
-
-        for (j = 1; j < numColumns; j++) {
-            fullBoard.innerHTML += "<div class=\"board-cell\"></div>";
+    for (i = 0; i < numColumns; i++) {
+        for (j = 0; j < numRows; j++) {
+            fullBoard.innerHTML += `<div id="${i}${j}" class="board-cell"></div>`;
         }
-        
     }
 }
 
 class babyCanasiBoard {
     constructor() {
-
+        
     }
 }
 
 //Pieces JS
 class babyCanasiPieces {
-    constructor(owner) {
-        this.owner = owner;
+    constructor(player) {
+        this.player = player;
         this.hitPoints = 2;
     }
 }
 
 class babyScrivtre extends babyCanasiPieces {
-    constructor(owner) {
-        super(owner);
+    constructor(player) {
+        super(player);
         this.hitPoints = 3
+        scrivtreIMG = "scrivtrePlaceHolder.jpg"
     }
 }
 
 class babySiluanai extends babyCanasiBoard {
-    constructor(owner) {
-        super(owner);
+    constructor(player) {
+        super(player);
+        siluanaiIMG = "silunaiPiece.jpg"
     }
 }
 
