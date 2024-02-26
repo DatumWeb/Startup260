@@ -5,6 +5,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="main.css">
+        <script src="score.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -30,7 +31,9 @@
         <main class="container-fluid">
             <h2 class="largeless-header text-center">Your <small>Baby</small>Canasi Stats</h2>
             <div class="container-fluid scores">
-                <div class="username">Datum</div>
+              <div id="username-container" class="container-fluid text-center">
+                <p><span class="username" id="username-score">Datum</span></p>
+                </div>
                 <div class="stats">
                     Total Wins: <span id="wins">12</span> and Losses: <span id="losses">1</span>
                 </div>

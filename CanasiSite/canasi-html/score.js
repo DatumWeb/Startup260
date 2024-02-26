@@ -1,20 +1,12 @@
-function getWins {
+//function getWins {
 
-}
-
-function getLosses {
-
-}
+//function getLosses {
+    
 
 function displayUsernames() {
     const yourUsername = localStorage.getItem("username");
-    console.log("Your Username:");
-    const opponentUsername = "Knight" //change this but idk how
 
-    document.getElementById("your-username").innerText = yourUsername;
-    document.getElementById("opponent-username").innerText = opponentUsername;
-
-
+    document.getElementById("username-score").innerText = yourUsername;
 }
 
 window.onload = function() {
