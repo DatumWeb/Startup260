@@ -30,8 +30,9 @@
         <main class="container-fluid">
             <h1 class="large-header text-center">Canasi<small> a clever game</small></h1>
             <p class="text-center">Login to play</p>
+            
             <div class="form-container">
-             <form method="get" action="game.html" class="custom-form">
+             <form id="login-form" method="get" action="" class="custom-form">
                <div class="form-group">
                  <label for="username">Username:</label>
                  <input type="text" id="username" placeholder="Enter your username" />
@@ -40,7 +41,7 @@
                     <label for="password">Password:</label>
                     <input type="password" id="password" placeholder="Enter your password"/>
                   </div>
-                  <button type="submit" class="btn btn-default">Login</button>
+                  <button onclick="login()" id="login-submit" type="submit" class="btn btn-default">Login</button>
               </form>
             </div>
             
