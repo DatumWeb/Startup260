@@ -1,6 +1,6 @@
-//function getWins {
+//function getWins() {
 
-//function getLosses {
+//function getLosses() {
     
 
 function displayUsernames() {

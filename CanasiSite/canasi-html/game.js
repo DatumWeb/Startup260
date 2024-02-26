@@ -1,7 +1,4 @@
-function futureMove() {
-
-}
-
+//Username JS
 function displayUsernames() {
     const yourUsername = localStorage.getItem("username");
     console.log("Your Username:");
@@ -16,3 +13,42 @@ function displayUsernames() {
 window.onload = function() {
     displayUsernames();
 };
+//Board JS
+class babyCanasiBoard {
+    constructor() {
+
+    }
+}
+
+//Pieces JS
+class babyCanasiPieces {
+    constructor() {
+        
+    }
+}
+
+//Game JS
+class babyCanasi {
+    constructor() {
+
+    }
+
+    futureMove() {
+
+    }
+
+    movePiece() {
+
+    }
+
+    adjustWinLoss() {
+
+    }
+
+    win() {
+    }
+
+    lose() {
+
+    }
+}
