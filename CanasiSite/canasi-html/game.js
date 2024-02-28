@@ -58,11 +58,13 @@ class BabyCanasiBoard {
             if (this.boardArray[x][y] == 0) {
                 if (piecesPlaced < 3) { //and player one, create another if statment for player 2 that is for the top three rows
                     let piece = new BabySilunai("playerOne");
+                    //console.log(piece.player); TA help
                     this.boardArray[x][y] = piece;
                     piecesPlaced += 1;
                     this.updateBoard();
                 }else {
                     let piece = new BabyScrivtre("playerOne");
+                    //console.log(piece.player); TA help
                     this.boardArray[x][y] = piece;
                     piecesPlaced += 1;
                     placingTiles = false;
@@ -90,7 +92,10 @@ class BabyCanasiBoard {
 
         if (moveTurn == true){
             if (selectingPiece == true) {
-                if (this.boardArray[x][y] != 0) { //piece.player == player.active
+                //console.log(this.boardArray[x][y].player);
+                //console.log(game.activePlayer);
+                if (this.boardArray[x][y] != 0  && this.boardArray[x][y].player == game.activePlayer) { //piece.player == player.active TA help
+
                     this.currentMovingPiece = this.boardArray[x][y];
                     this.oldLocation = [x, y];  //saves location to be deleted 
                     //selectingPiece = false;
@@ -100,7 +105,7 @@ class BabyCanasiBoard {
 
             }
             if (movingPiece == true) {
-                if (this.boardArray[x][y] == 0 ) { //piece.player == player.active
+                if (this.boardArray[x][y] == 0) { //checks if cell is empty and if it is your piece
                     //if statment to check xy distance
                     if (Math.abs(this.oldLocation[0] - x)  < 4) {
                         this.boardArray[x][y] = this.currentMovingPiece;
@@ -170,6 +175,7 @@ class BabyScrivtre extends BabyCanasiPieces {
 class BabySilunai extends BabyCanasiBoard {
     constructor(player) {
         super(player);
+        this.hitPoints =2;
         this.pieceImg = "silunaiPiece.jpg"
     }
 }
@@ -180,12 +186,16 @@ class BabySilunai extends BabyCanasiBoard {
 class BabyCanasi {
     constructor() {
         //ai stuffs
-        this.nyktaSilunai = new BabySilunai("nykta");
+        this.nyktaSilunai = new BabySilunai("nykta");  //let of this TA help
         this.nyktaSilunaiTwo = new BabySilunai("nykta");
         this.nyktaSilunaiThree = new BabySilunai("nykta");
         this.nyktaScrivtre = new BabyScrivtre("nykta");
+        console.log(this.nyktaScrivtre.name);
+        console.log(this.nyktaSilunai.name);
+
+        this.activePlayer = "playerOne"; //this will change later for websocket
         
-        // endai stuffs
+        // end ai stuffs
     }
     initialize() {
         this.turnZero();
