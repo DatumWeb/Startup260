@@ -70,4 +70,15 @@ https://startup.canasigame.com
 
 ***Application images*** - Images are sized evenly and can be hovered over for info.
 
+## JavaScript
+***Login*** - When you Login, it gives you a prompt saying you have logged in, and displays your name on the game page and score page.
+
+***Database*** - Saves player wins and losses, curretly is placeheld in local storage tracking pieces placed as wins and times refreshed as losses. But this will be wins and losses saved in database later.
+
+***WebSocket*** - There are place holder pieces for opponenets and you will be able to face them live with websocket. WebSockey will also handle the prompts for the players moves and show them the players planned move.
+
+***Appliction Logic*** - The game logic is mostly implimented and you are able to spawn in your pieces, and move pieces you own.
+
+***TODO*** - Will finish game logic, and get rid of rough place holders when WebSocket is implimented.
+
 
