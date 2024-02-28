@@ -250,7 +250,6 @@ class BabyCanasi {
     nyktaTurn() {
 
     }
-
     changePlayerTurn () {
         if (playerTurn == 1) {
             playerTurn = 2;
