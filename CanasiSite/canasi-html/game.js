@@ -55,23 +55,25 @@ class BabyCanasiBoard {
         //placing tiles for turn zero logic
         if(placingTiles == true && x > 3) {
             //if statment to see if a piece is already there
-            if (piecesPlaced < 3) { //and player one, create another if statment for player 2 that is for the top three rows
-                let piece = new BabySiluanai();
-                this.boardArray[x][y] = piece;
-                piecesPlaced += 1;
-                this.updateBoard();
-            } else {
-                let piece = new BabyScrivtre();
-                this.boardArray[x][y] = piece;
-                piecesPlaced += 1;
-                placingTiles = false;
-                moveTurn = true;
-                selectingPiece = true;
+            if (this.boardArray[x][y] == 0) {
+                if (piecesPlaced < 3) { //and player one, create another if statment for player 2 that is for the top three rows
+                    let piece = new BabySilunai("playerOne");
+                    this.boardArray[x][y] = piece;
+                    piecesPlaced += 1;
+                    this.updateBoard();
+                }else {
+                    let piece = new BabyScrivtre("playerOne");
+                    this.boardArray[x][y] = piece;
+                    piecesPlaced += 1;
+                    placingTiles = false;
+                    moveTurn = true;
+                    selectingPiece = true;
                 
-                this.updateBoard();
-                return;
+                    this.updateBoard();
+                    return;
 
             }
+        }
         }
         // end place tiles
 
@@ -165,7 +167,7 @@ class BabyScrivtre extends BabyCanasiPieces {
     }
 }
 
-class BabySiluanai extends BabyCanasiBoard {
+class BabySilunai extends BabyCanasiBoard {
     constructor(player) {
         super(player);
         this.pieceImg = "silunaiPiece.jpg"
@@ -177,23 +179,59 @@ class BabySiluanai extends BabyCanasiBoard {
 
 class BabyCanasi {
     constructor() {
-       
-
+        //ai stuffs
+        this.nyktaSilunai = new BabySilunai("nykta");
+        this.nyktaSilunaiTwo = new BabySilunai("nykta");
+        this.nyktaSilunaiThree = new BabySilunai("nykta");
+        this.nyktaScrivtre = new BabyScrivtre("nykta");
+        
+        // endai stuffs
     }
     initialize() {
         this.turnZero();
+        this.nykta();
     }
 
     turnZero () {
         document.getElementById("move-prompt").innerText = "Click on 4 tiles to choose your starting location. First 3 are Silunai, the last is the Scrivtre";
         placingTiles = true;
         //add a prompt when the tiles are placed to demonstrate websocket
-    //both both board updating and move-prompt will be websocket
+        //both both board updating and move-prompt will be websocket
     }
 
     movePiece () {
-        document.getElementById("move-prompt").innerText = "Click on a piece and and a tile to move it.";
+        document.getElementById("move-prompt").innerText = "Click your piece and and a tile to move it up to 3 pieces.";
 
+
+    }
+
+    nykta () {
+        let numNyktaSilunai = 0;
+        let numNyktaScriivtre = 0;
+        //place nykta silunai
+        while ( numNyktaSilunai != 3) {
+            let nyktaX = Math.floor(Math.random() * 3);
+            let nyktaY = Math.floor(Math.random() * 6);
+            //checks if piece is there already
+            if (board.boardArray[nyktaX][nyktaY] == 0){
+                board.boardArray[nyktaX][nyktaY] = this.nyktaSilunai;
+                numNyktaSilunai += 1;
+            }
+
+        }
+        //play nykta scrivtre
+        while( numNyktaScriivtre != 1) {
+            let nyktaX = Math.floor(Math.random() * 3);
+            let nyktaY = Math.floor(Math.random() * 6);
+        //checks if piece is there alreay
+            if (board.boardArray[nyktaX][nyktaY] == 0){
+                board.boardArray[nyktaX][nyktaY] = this.nyktaScrivtre;
+                numNyktaScriivtre +=1;
+            }
+        }
+
+
+        
 
     }
 
