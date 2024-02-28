@@ -17,6 +17,8 @@ function test() {
 placingTiles = false;
 declareMove = false;
 moveTurn = false;
+selectingPiece = false;
+movingPiece = false;
 piecesPlaced = 0;
 numRows = 7;
 numColumns =7;
@@ -24,6 +26,8 @@ numColumns =7;
 
 class BabyCanasiBoard {
     boardArray = [];
+    currentMovingPiece = null;
+    oldLocation = null;
 
     constructor() {
         
@@ -47,6 +51,7 @@ class BabyCanasiBoard {
     tileClicked(clickEvent) {
         let coords = clickEvent.target.id;
         let x = Number(String(coords)[0]);
+        console.log(x);
         let y = Number(String(coords)[1]);
         if(placingTiles == true) {
             //if statment to see if a piece is already there
@@ -60,34 +65,65 @@ class BabyCanasiBoard {
                 this.boardArray[x][y] = piece;
                 piecesPlaced += 1;
                 placingTiles = false;
+                moveTurn = true;
+                selectingPiece = true;
+                
                 this.updateBoard();
+                return;
 
             }
         }
         
-        if (declareMove == true){
-            if (this.boardArray[x][y] != 0 && piece.player == player.active) {
-
+         if (declareMove == true){
+            if (selectingPiece == true){
+                if (this.boardArray[x][y] != 0 ) { //&& piece.player == player.active   
+                  
+                }
             }
+            
 
 
         }
 
         if (moveTurn == true){
-            if (this.boardArray[x][y] != 0 && piece.player == player.active) {
-                 this.boardArray[x][y] = 0;
+            console.log(selectingPiece)
+            if (selectingPiece == true) {
+                console.log(x);
+                if (this.boardArray[x][y] != 0) { //piece.player == player.active
+                    this.currentMovingPiece = this.boardArray[x][y];
+                    this.oldLocation = [x, y];  //saves location to be deleted 
+                    selectingPiece = false;
+                    movingPiece = true;
+                }
+
             }
+            else if (movingPiece == true) {
+                if (this.boardArray[x][y] == 0 ) { //piece.player == player.active
+                    //if statment to check xy distance
+                    this.boardArray[x][y] = this.currentMovingPiece;
+                    this.boardArray[this.oldLocation[0]][this.oldLocation[1]] = 0;
+                    console.log(this.oldLocation);
+                    movingPiece = false;
+                    selectingPiece = true;
+            }
+
+            this.updateBoard();
+            
 
         }
 
+        }
     }
 
     updateBoard() {
         for (let i = 0; i < numColumns; i++) {
             for (let j = 0; j < numRows; j++) {
+                let activeTile = document.getElementById(`${i}${j}`);
                 if (this.boardArray[i][j] != 0) {
-                    let activeTile = document.getElementById(`${i}${j}`);
-                    activeTile.innerHTML = `<img class="placed-piece" src="${this.boardArray[i][j].pieceImg}">`;
+                    activeTile.innerHTML = `<img id="${i}${j}" class="placed-piece" src="${this.boardArray[i][j].pieceImg}">`;
+                }
+                else {
+                    activeTile.innerHTML = ``;
                 }
 
             }
@@ -106,7 +142,8 @@ class BabyCanasiBoard {
         return gameBoardArray;
     }
 
-}
+    }
+
 
 //Pieces JS
 class BabyCanasiPieces {
@@ -156,6 +193,8 @@ class BabyCanasi {
 
 
     }
+
+
 }
 
 
