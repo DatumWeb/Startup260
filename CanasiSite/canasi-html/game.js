@@ -13,7 +13,7 @@ function test() {
 }
 
 //Board JS
-
+playerTurn = 1;
 placingTiles = false;
 declareMove = false;
 moveTurn = false;
@@ -58,14 +58,16 @@ class BabyCanasiBoard {
             if (this.boardArray[x][y] == 0) {
                 if (piecesPlaced < 3) { //and player one, create another if statment for player 2 that is for the top three rows
                     let piece = new BabySilunai("playerOne");
-                    //console.log(piece.player); TA help
+                    console.log(piece.player);
                     this.boardArray[x][y] = piece;
                     piecesPlaced += 1;
+                    placeIsWin();
                     this.updateBoard();
-                }else {
+                } else {
                     let piece = new BabyScrivtre("playerOne");
-                    //console.log(piece.player); TA help
+                    console.log(piece.player);
                     this.boardArray[x][y] = piece;
+                    placeIsWin();
                     piecesPlaced += 1;
                     placingTiles = false;
                     moveTurn = true;
@@ -111,12 +113,15 @@ class BabyCanasiBoard {
                         this.boardArray[x][y] = this.currentMovingPiece;
                         this.boardArray[this.oldLocation[0]][this.oldLocation[1]] = 0;
                         movingPiece = false;
+                        placeIsWin();
+                        game.changePlayerTurn();
                     //selectingPiece = true;
                     }
                     
             }
 
             this.updateBoard();
+            //nytaTurn
             
 
         }
@@ -172,10 +177,10 @@ class BabyScrivtre extends BabyCanasiPieces {
     }
 }
 
-class BabySilunai extends BabyCanasiBoard {
+class BabySilunai extends BabyCanasiPieces {
     constructor(player) {
         super(player);
-        this.hitPoints =2;
+        this.hitPoints = 2;
         this.pieceImg = "silunaiPiece.jpg"
     }
 }
@@ -240,9 +245,36 @@ class BabyCanasi {
             }
         }
 
+    }
 
-        
+    nyktaTurn() {
 
+    }
+
+    changePlayerTurn () {
+        if (playerTurn == 1) {
+            playerTurn = 2;
+        } else {
+            playerTurn = 2;
+        }
+    }
+
+
+}
+
+
+//placeholder for storing wins and losses
+let fakeWins = 0;
+function placeIsWin () {
+    fakeWins += 1; 
+    localStorage.setItem("fakeWins", fakeWins);
+}
+
+function reloadIsLoss () {
+    if(localStorage.reloadCount) {
+        localStorage.reloadCount = parseInt(localStorage.reloadCount) +1;
+    } else {
+        localStorage.reloadCount = 1;
     }
 
 
@@ -257,5 +289,6 @@ window.onload = function() {
     displayUsernames();
     board.initialize();
     game.initialize();
+    reloadIsLoss();
 };
 
