@@ -51,11 +51,11 @@ class BabyCanasiBoard {
     tileClicked(clickEvent) {
         let coords = clickEvent.target.id;
         let x = Number(String(coords)[0]);
-        console.log(x);
         let y = Number(String(coords)[1]);
-        if(placingTiles == true) {
+        //placing tiles for turn zero logic
+        if(placingTiles == true && x > 3) {
             //if statment to see if a piece is already there
-            if (piecesPlaced < 3) {
+            if (piecesPlaced < 3) { //and player one, create another if statment for player 2 that is for the top three rows
                 let piece = new BabySiluanai();
                 this.boardArray[x][y] = piece;
                 piecesPlaced += 1;
@@ -73,7 +73,8 @@ class BabyCanasiBoard {
 
             }
         }
-        
+        // end place tiles
+
          if (declareMove == true){
             if (selectingPiece == true){
                 if (this.boardArray[x][y] != 0 ) { //&& piece.player == player.active   
@@ -86,25 +87,26 @@ class BabyCanasiBoard {
         }
 
         if (moveTurn == true){
-            console.log(selectingPiece)
             if (selectingPiece == true) {
-                console.log(x);
                 if (this.boardArray[x][y] != 0) { //piece.player == player.active
                     this.currentMovingPiece = this.boardArray[x][y];
                     this.oldLocation = [x, y];  //saves location to be deleted 
-                    selectingPiece = false;
+                    //selectingPiece = false;
                     movingPiece = true;
+                    return;
                 }
 
             }
-            else if (movingPiece == true) {
+            if (movingPiece == true) {
                 if (this.boardArray[x][y] == 0 ) { //piece.player == player.active
                     //if statment to check xy distance
-                    this.boardArray[x][y] = this.currentMovingPiece;
-                    this.boardArray[this.oldLocation[0]][this.oldLocation[1]] = 0;
-                    console.log(this.oldLocation);
-                    movingPiece = false;
-                    selectingPiece = true;
+                    if (Math.abs(this.oldLocation[0] - x)  < 4) {
+                        this.boardArray[x][y] = this.currentMovingPiece;
+                        this.boardArray[this.oldLocation[0]][this.oldLocation[1]] = 0;
+                        movingPiece = false;
+                    //selectingPiece = true;
+                    }
+                    
             }
 
             this.updateBoard();
@@ -185,7 +187,8 @@ class BabyCanasi {
     turnZero () {
         document.getElementById("move-prompt").innerText = "Click on 4 tiles to choose your starting location. First 3 are Silunai, the last is the Scrivtre";
         placingTiles = true;
-    
+        //add a prompt when the tiles are placed to demonstrate websocket
+    //both both board updating and move-prompt will be websocket
     }
 
     movePiece () {
