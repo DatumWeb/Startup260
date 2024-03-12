@@ -248,6 +248,31 @@ class BabyCanasi {
     }
 
     nyktaTurn() {
+        //checks what pieces are still alive
+        let nyktaLocations = [];
+
+        //finds pieces and savces cords
+        for (let i =  0; i < numColumns; i ++) {
+            for (let j = 0; j < numRows; j++) {
+                if (board.boardArray[i][j] !== 0 && board.boardArray [i][j] === "nykta") {
+                    nyktaLocations.push([i,j]);
+                }
+            }
+        }
+
+        // uses saved location and chooses a random one
+        if (nyktaLocations.length > 0) {
+            let randomPieceIndex = Math.floor(Math.random() * nyktaLocations.length);
+            let [x, y] = nyktaLocations[randomPieceIndex];
+            
+            
+
+
+        }
+
+    }
+
+    nyktaTurn() {
 
     }
     changePlayerTurn () {
