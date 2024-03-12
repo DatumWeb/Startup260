@@ -251,7 +251,7 @@ class BabyCanasi {
         //checks what pieces are still alive
         let nyktaLocations = [];
 
-        //finds pieces and savces cords
+        //finds pieces and saves cords
         for (let i =  0; i < numColumns; i ++) {
             for (let j = 0; j < numRows; j++) {
                 if (board.boardArray[i][j] !== 0 && board.boardArray [i][j] === "nykta") {
@@ -263,9 +263,21 @@ class BabyCanasi {
         // uses saved location and chooses a random one
         if (nyktaLocations.length > 0) {
             let randomPieceIndex = Math.floor(Math.random() * nyktaLocations.length);
-            let [x, y] = nyktaLocations[randomPieceIndex];
+            let [x, y] = nyktaLocations[randomPieceIndex]; //cords for random piece
+
+            let validMoveRange = [];
+            for (let i = x - 3; i <= x + 3; i++) {
+                for (let j = y - 3; j <= y + 3; j++) {
+                   if (i >= 0 && i < numColumns && j >= 0 && j < numRows) {
+                    if (board.boardArray[i][j] === 0 || board.boardArray[i][j].player !== "nykta"){
+                        validMoveRange.push([i, j]);
+                    }
+                   }
+                }
+            }
             
             
+
 
 
         }
