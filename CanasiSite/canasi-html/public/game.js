@@ -207,6 +207,40 @@ class BabyCanasi {
         this.nykta();
     }
 
+    checkIfWin() {
+        let nyktaLocations = [];
+        let playerLocations = [];
+        let winner = null;
+        //finds pieces and saves cords
+        for (let i =  0; i < numColumns; i ++) {
+            for (let j = 0; j < numRows; j++) {
+                if (board.boardArray[i][j] !== 0 && board.boardArray[i][j].player === "nykta") {
+                    nyktaLocations.push([i,j]);
+                }
+            }
+        }
+
+        //finds pieces and saves cords
+        for (let i =  0; i < numColumns; i ++) {
+            for (let j = 0; j < numRows; j++) {
+                if (board.boardArray[i][j] !== 0 && board.boardArray[i][j].player === "playerOne") {
+                    playerLocations.push([i,j]);
+                }
+            }
+        }
+
+        if (nyktaLocations.length === 0) {
+            winner = "Usernameof person";
+        }
+        if (playerLocations.length === 0) {
+            winner = "Nykta";
+        }
+
+        if(winner !== null) {
+            //display winner add counter, end game
+        } 
+    }
+
     turnZero () {
         document.getElementById("move-prompt").innerText = "Click on 4 tiles to choose your starting location. First 3 are Silunai, the last is the Scrivtre";
         placingTiles = true;
@@ -271,8 +305,6 @@ class BabyCanasi {
                    if (i >= 0 && i < numColumns && j >= 0 && j < numRows) {
                     if (board.boardArray[i][j] === 0 || board.boardArray[i][j].player !== "nykta"){
                         validMoveRange.push([i, j]);
-                        console.log(i)
-                        console.log(j)
                     }
                    }
                 }
