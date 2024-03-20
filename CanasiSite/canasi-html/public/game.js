@@ -67,7 +67,7 @@ class BabyCanasiBoard {
                     let piece = new BabyScrivtre("playerOne");
                     console.log(piece.player);
                     this.boardArray[x][y] = piece;
-                    placeIsWin();
+                    placeIsWin(); //websocket
                     piecesPlaced += 1;
                     placingTiles = false;
                     moveTurn = true;
@@ -106,7 +106,7 @@ class BabyCanasiBoard {
                 }
 
             }
-            if (movingPiece == true) {
+            if (movingPiece) {
                 if (this.boardArray[x][y] == 0) { //checks if cell is empty and if it is your piece
                     //if statment to check xy distance
                     if (Math.abs(this.oldLocation[0] - x)  < 4) {
@@ -115,6 +115,7 @@ class BabyCanasiBoard {
                         movingPiece = false;
                         placeIsWin();
                         game.changePlayerTurn();
+                        game.nyktaTurn();
                     //selectingPiece = true;
                     }
                     
@@ -274,6 +275,15 @@ class BabyCanasi {
                     }
                    }
                 }
+            }
+
+            //select randmo cord in good range
+            if (validMoveRange.length> 0) {
+                let randomIndexMove = Math.floor(Math.random() * validMoveRange.length);
+                let [newX, newY] = validMoveRange[randomIndexMove];
+
+                board.boardArray[newX][newY] = board.boardArray[x][y];
+                board.boardArray[x][y] = 0; // sets board to empty 
             }
             
             
