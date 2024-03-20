@@ -9,7 +9,7 @@ function displayUsernames() {
 
 
 function test() {
-    console.log("hello");
+    //console.log("hello");
 }
 
 //Board JS
@@ -58,14 +58,14 @@ class BabyCanasiBoard {
             if (this.boardArray[x][y] == 0) {
                 if (piecesPlaced < 3) { //and player one, create another if statment for player 2 that is for the top three rows
                     let piece = new BabySilunai("playerOne");
-                    console.log(piece.player);
+                    
                     this.boardArray[x][y] = piece;
                     piecesPlaced += 1;
                     placeIsWin();
                     this.updateBoard();
                 } else {
                     let piece = new BabyScrivtre("playerOne");
-                    console.log(piece.player);
+                
                     this.boardArray[x][y] = piece;
                     placeIsWin(); //websocket
                     piecesPlaced += 1;
@@ -196,8 +196,7 @@ class BabyCanasi {
         this.nyktaSilunaiTwo = new BabySilunai("nykta");
         this.nyktaSilunaiThree = new BabySilunai("nykta");
         this.nyktaScrivtre = new BabyScrivtre("nykta");
-        console.log(this.nyktaScrivtre.name);
-        console.log(this.nyktaSilunai.name);
+
 
         this.activePlayer = "playerOne"; //this will change later for websocket
         
@@ -255,7 +254,7 @@ class BabyCanasi {
         //finds pieces and saves cords
         for (let i =  0; i < numColumns; i ++) {
             for (let j = 0; j < numRows; j++) {
-                if (board.boardArray[i][j] !== 0 && board.boardArray [i][j] === "nykta") {
+                if (board.boardArray[i][j] !== 0 && board.boardArray[i][j].player === "nykta") {
                     nyktaLocations.push([i,j]);
                 }
             }
@@ -272,6 +271,8 @@ class BabyCanasi {
                    if (i >= 0 && i < numColumns && j >= 0 && j < numRows) {
                     if (board.boardArray[i][j] === 0 || board.boardArray[i][j].player !== "nykta"){
                         validMoveRange.push([i, j]);
+                        console.log(i)
+                        console.log(j)
                     }
                    }
                 }
@@ -294,9 +295,7 @@ class BabyCanasi {
 
     }
 
-    nyktaTurn() {
-
-    }
+    
     changePlayerTurn () {
         if (playerTurn == 1) {
             playerTurn = 2;
