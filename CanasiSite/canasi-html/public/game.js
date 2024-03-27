@@ -1,6 +1,6 @@
 //Username JS
 function displayUsernames() {
-    const yourUsername = localStorage.getItem("username");
+    const yourUsername = localStorage.getItem("username"); //save this another way
     const opponentUsername = "Nykta" //change this to active opponent
 
     document.getElementById("your-username").innerText = yourUsername;
@@ -120,7 +120,10 @@ class BabyCanasiBoard {
                     }
                 }
 
-                if (this.boardArray[x][y] == 1 && this.boardArray[x][y].player != game.activePlayer) {
+                console.log(this.boardArray[x][y].player)
+                console.log(game.activePlayer)
+                console.log(this.boardArray[x][y])
+                if (this.boardArray[x][y] != 0 && this.boardArray[x][y].player != game.activePlayer) {
                     //if statment to check xy distance
                     if (Math.abs(this.oldLocation[0] - x)  < 4) {
                         this.boardArray[x][y].hitPoints -= 1;
@@ -134,6 +137,7 @@ class BabyCanasiBoard {
                 }
 
             this.updateBoard();
+            game.checkIfWin();
             //nytaTurn
             
 
@@ -250,7 +254,10 @@ class BabyCanasi {
 
         if(winner !== null) {
             //display winner add counter, end game
+            alert(winner + " is the winner");
         } 
+        
+        //keep track of amount of wins
     }
 
     turnZero () {
