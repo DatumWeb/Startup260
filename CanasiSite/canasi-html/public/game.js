@@ -361,8 +361,9 @@ class BabyCanasi {
 
 //placeholder for storing wins and losses
 let fakeWins = 0;
-function placeIsWin () {
-    fakeWins += 1; 
+function Win () {
+    fakeWins += 1;
+    //fetch call playerwins
     localStorage.setItem("fakeWins", fakeWins);
 }
 

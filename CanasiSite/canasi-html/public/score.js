@@ -9,10 +9,17 @@ function displayUsernames() {
     document.getElementById("username-score").innerText = yourUsername;
 }
 
-function displayWinsAndLosses () {
-    const wins = localStorage.getItem("fakeWins");
-    const losses = localStorage.reloadCount || 0;
+async function displayWinsAndLosses () {
+    let wins = 0;
+    const responseWins = await fetch('/api/playerWins');
+    wins = await responseWins.json()
+    //const wins = localStorage.getItem("fakeWins");
+    let losses = 0;
+    const responseLosses = await fetch('/api/Playerlosses');
 
+    losses = await responseLosses.json();
+
+    
     document.getElementById("wins").innerText = wins;
     document.getElementById("losses").innerText = losses;
     console.log(wins);

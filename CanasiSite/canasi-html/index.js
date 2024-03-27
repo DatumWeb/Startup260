@@ -1,5 +1,5 @@
-const cookieParser = require('cookie-parser');
-const bcrypt = require('bcrypt');
+//const cookieParser = require('cookie-parser');
+//const bcrypt = require('bcrypt');
 const express = require('express');
 const app = express();
 const DB = require('./database.js');
@@ -32,25 +32,34 @@ app.use(`/api`, apiRouter);
 
 
 //Gets Wins and Losses
-let playerWins = 0;
-let playerLosses = 0;
-apiRouter.get('/playerWins', (_req, res) => {
+let players = [
+    {user: "person",
+    wins: 5,
+    losses: 2}
+];
+
+//find()
+apiRouter.get('/playerWins/:user', (req, res) => {
     //res.json({wins: playerWins});
-    res.send(playerWins);
+    username = req.params.user;
+    res.send(players.find(properPlayer => properPlayer.user === username));
 });
 
 apiRouter.post('/playerWins', (req, res) => {
-    playerWins = updateWinsLosses(req.body, playerWins)
-    res.send(playerWins);
+    updateWinsLosses(req.body.username,req.body.gameResult)
+    res.send();
 })
 
 //tracks wins and losses
 
-function updateWinsLosses(gameResult) {
+function updateWinsLosses(username, gameResult) {
+
+    indexOfProperPlayer = players.findIndex(properPlayer => properPlayer.user === username);
+
     if (gameResult == "win") {
-        playerWins++;
+        players[indexOfProperPlayer].wins++;
     } else if (gameResult == "loss") {
-        playerLosses++;
+        players[indexOfProperPlayer].losses++;
     }
 
 }
