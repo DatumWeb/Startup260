@@ -107,7 +107,7 @@ class BabyCanasiBoard {
 
             }
             if (movingPiece) {
-                if (this.boardArray[x][y] == 0) { //checks if cell is empty and if it is your piece
+                if (this.boardArray[x][y] == 0) { //checks if cell is empty and if it is your piece  //blank spot
                     //if statment to check xy distance
                     if (Math.abs(this.oldLocation[0] - x)  < 4) {
                         this.boardArray[x][y] = this.currentMovingPiece;
@@ -118,8 +118,20 @@ class BabyCanasiBoard {
                         game.nyktaTurn();
                     //selectingPiece = true;
                     }
-                    
-            }
+                }
+
+                if (this.boardArray[x][y] == 1 && this.boardArray[x][y].player != game.activePlayer) {
+                    //if statment to check xy distance
+                    if (Math.abs(this.oldLocation[0] - x)  < 4) {
+                        this.boardArray[x][y].hitPoints -= 1;
+                        this.boardArray[x][y] = this.currentMovingPiece;
+                        this.boardArray[this.oldLocation[0]][this.oldLocation[1]] = 0;
+                        movingPiece = false;
+                        placeIsWin();
+                        game.changePlayerTurn();
+                        game.nyktaTurn();
+                    }
+                }
 
             this.updateBoard();
             //nytaTurn
@@ -164,7 +176,7 @@ class BabyCanasiBoard {
 class BabyCanasiPieces {
     constructor(player) {
         this.player = player;
-        this.hitPoints = 2;
+        this.hitPoints = 1;
         this.pieceImg = "";
 
     }
@@ -173,7 +185,7 @@ class BabyCanasiPieces {
 class BabyScrivtre extends BabyCanasiPieces {
     constructor(player) {
         super(player);
-        this.hitPoints = 3
+        this.hitPoints = 1;
         this.pieceImg = "scrivtrePlaceHolder.jpg"
     }
 }
@@ -181,7 +193,7 @@ class BabyScrivtre extends BabyCanasiPieces {
 class BabySilunai extends BabyCanasiPieces {
     constructor(player) {
         super(player);
-        this.hitPoints = 2;
+        this.hitPoints = 1;
         this.pieceImg = "silunaiPiece.jpg"
     }
 }
