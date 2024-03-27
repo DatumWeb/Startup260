@@ -55,3 +55,30 @@ https://startup.canasigame.com
 
 ***Third Party*** - There will be a random quote generator.
 
+## CSS Deliverable
+https://startup.canasigame.com
+
+***Header, footer, and main content body*** - There is a header, footer, and main elements, they are uniforly sylized.
+
+***Navigation elements*** - There is a nav bar with hyperlinks and styled at the top of each page.
+
+***Responsive to window resizing*** - The nave bar, and images respond to smaller screens, and some adjustments were made when content was cut off because of it.
+
+***Application elements*** - There is good contrast with the black and white (and grey) elements are spaced nicely to make info clear.
+
+***Application text content*** - The fonts and font sizes are consistent and info clear.
+
+***Application images*** - Images are sized evenly and can be hovered over for info.
+
+## JavaScript
+***Login*** - When you Login, it gives you a prompt saying you have logged in, and displays your name on the game page and score page.
+
+***Database*** - Saves player wins and losses, curretly is placeheld in local storage tracking pieces placed as wins and times refreshed as losses. But this will be wins and losses saved in database later.
+
+***WebSocket*** - There are place holder pieces for opponenets and you will be able to face them live with websocket. WebSocket will also handle the prompts for the players moves and show them the players planned move. In my JavaScript I have functions to keep track of player turn and this will be implimented when we put websocket in.
+
+***Appliction Logic*** - The game logic is mostly implimented and you are able to spawn in your pieces, and move pieces you own.
+
+***TODO*** - Will finish game logic, and get rid of rough place holders when WebSocket is implimented.
+
+
