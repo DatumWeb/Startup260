@@ -22,6 +22,8 @@ movingPiece = false;
 piecesPlaced = 0;
 numRows = 7;
 numColumns =7;
+playerOne = localStorage.getItem("username"); //database it
+playerTwo = null;
 
 
 class BabyCanasiBoard {
@@ -57,17 +59,17 @@ class BabyCanasiBoard {
             //if statment to see if a piece is already there
             if (this.boardArray[x][y] == 0) {
                 if (piecesPlaced < 3) { //and player one, create another if statment for player 2 that is for the top three rows
-                    let piece = new BabySilunai("playerOne");
+                    let piece = new BabySilunai(playerOne);// probably will go to active player
                     
                     this.boardArray[x][y] = piece;
                     piecesPlaced += 1;
-                    placeIsWin();
+                    //placeIsWin();
                     this.updateBoard();
                 } else {
-                    let piece = new BabyScrivtre("playerOne");
+                    let piece = new BabyScrivtre(playerOne);//probably will go to active player
                 
                     this.boardArray[x][y] = piece;
-                    placeIsWin(); //websocket
+                    //placeIsWin(); //websocket
                     piecesPlaced += 1;
                     placingTiles = false;
                     moveTurn = true;
@@ -113,7 +115,7 @@ class BabyCanasiBoard {
                         this.boardArray[x][y] = this.currentMovingPiece;
                         this.boardArray[this.oldLocation[0]][this.oldLocation[1]] = 0;
                         movingPiece = false;
-                        placeIsWin();
+                        //placeIsWin();
                         game.changePlayerTurn();
                         game.nyktaTurn();
                     //selectingPiece = true;
@@ -130,7 +132,7 @@ class BabyCanasiBoard {
                         this.boardArray[x][y] = this.currentMovingPiece;
                         this.boardArray[this.oldLocation[0]][this.oldLocation[1]] = 0;
                         movingPiece = false;
-                        placeIsWin();
+                        //placeIsWin();
                         game.changePlayerTurn();
                         game.nyktaTurn();
                     }

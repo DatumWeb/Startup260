@@ -33,16 +33,14 @@ app.use(`/api`, apiRouter);
 
 //Gets Wins and Losses
 let players = [
-    {user: "person",
-    wins: 5,
-    losses: 2}
+    //{"username": { wins: 5, losses: 2}
 ];
 
 //find()
 apiRouter.get('/playerWins/:user', (req, res) => {
     //res.json({wins: playerWins});
     username = req.params.user;
-    res.send(players.find(properPlayer => properPlayer.user === username));
+    res.send(players[username]);
 });
 
 apiRouter.post('/playerWins', (req, res) => {
@@ -54,12 +52,11 @@ apiRouter.post('/playerWins', (req, res) => {
 
 function updateWinsLosses(username, gameResult) {
 
-    indexOfProperPlayer = players.findIndex(properPlayer => properPlayer.user === username);
 
     if (gameResult == "win") {
-        players[indexOfProperPlayer].wins++;
+        players[username].wins++;
     } else if (gameResult == "loss") {
-        players[indexOfProperPlayer].losses++;
+        players[username].losses++;
     }
 
 }
