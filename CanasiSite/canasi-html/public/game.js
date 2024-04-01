@@ -223,10 +223,11 @@ class BabyCanasi {
         this.nykta();
     }
 
-    checkIfWin() {
+    async checkIfWin() {
         let nyktaLocations = [];
         let playerLocations = [];
         let winner = null;
+        let loser = null;
         //finds pieces and saves cords
         for (let i =  0; i < numColumns; i ++) {
             for (let j = 0; j < numRows; j++) {
@@ -247,17 +248,39 @@ class BabyCanasi {
 
         if (nyktaLocations.length === 0) {
             winner = "Usernameof person";
+            loser = "Nykta";
         }
         if (playerLocations.length === 0) {
             winner = "Nykta";
+            loser = "Usernameof person";
         }
 
         if(winner !== null) {
             //display winner add counter, end game
             alert(winner + " is the winner");
+            try {
+                await fetch('api/playerWins', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json'},
+                    body: JSON.stringify({ username: winner, gameResult: 'win' })
+                });
+            } catch (error) {
+                console.error('Error adding win:', error);
+            }
+
+            try {
+                await fetch('api/playerLosses', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json'},
+                    body: JSON.stringify({ username: loser, gameResult: 'loss' })
+                });
+            } catch (error) {
+                console.error('Error adding loss:', error);
+            }
         } 
         
         //keep track of amount of wins
+
     }
 
     turnZero () {
