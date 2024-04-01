@@ -216,7 +216,7 @@ class BabyCanasi {
         this.nyktaScrivtre = new BabyScrivtre("nykta");
 
 
-        this.activePlayer = "playerOne"; //this will change later for websocket
+        this.activePlayer = playerOne; //this will change later for websocket
         
         // end ai stuffs
     }
@@ -242,19 +242,19 @@ class BabyCanasi {
         //finds pieces and saves cords
         for (let i =  0; i < numColumns; i ++) {
             for (let j = 0; j < numRows; j++) {
-                if (board.boardArray[i][j] !== 0 && board.boardArray[i][j].player === "playerOne") {
+                if (board.boardArray[i][j] !== 0 && board.boardArray[i][j].player === playerOne) {
                     playerLocations.push([i,j]);
                 }
             }
         }
 
         if (nyktaLocations.length === 0) {
-            winner = "Usernameof person";
+            winner = playerOne;
             loser = "Nykta";
         }
         if (playerLocations.length === 0) {
             winner = "Nykta";
-            loser = "Usernameof person";
+            loser = playerOne;
         }
 
         if(winner !== null) {
@@ -385,14 +385,14 @@ class BabyCanasi {
 
 
 //placeholder for storing wins and losses
-let fakeWins = 0;
+/*let fakeWins = 0;
 function Win () {
     fakeWins += 1;
     //fetch call playerwins
     localStorage.setItem("fakeWins", fakeWins);
-}
+}*/
 
-function reloadIsLoss () {
+/*function reloadIsLoss () {
     if(localStorage.reloadCount) {
         localStorage.reloadCount = parseInt(localStorage.reloadCount) +1;
     } else {
@@ -400,7 +400,7 @@ function reloadIsLoss () {
     }
 
 
-}
+}*/
 
 
 //instances
@@ -411,6 +411,6 @@ window.onload = function() {
     displayUsernames();
     board.initialize();
     game.initialize();
-    reloadIsLoss();
+    //reloadIsLoss();
 };
 
