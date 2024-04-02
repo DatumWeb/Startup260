@@ -40,17 +40,21 @@ let players = [
 apiRouter.get('/playerWins/:user', (req, res) => {
     //res.json({wins: playerWins});
     username = req.params.user;
-    res.send(players[username]);
+    res.json(players[username]);
 });
 
-apiRouter.post('/playerWins', (req, res) => {
-    updateWinsLosses(req.body.username,req.body.gameResult)
+apiRouter.post('/playerResults', (req, res) => {
+    const { username, gameResult } = req.body;
+    updateWinsLosses(username, gameResult);
     res.send();
-})
+});
 
 //tracks wins and losses
 
 function updateWinsLosses(username, gameResult) {
+    if (!players[username]) {
+        players[username] = { wins: 0, losses: 0 };
+    }
 
 
     if (gameResult == "win") {

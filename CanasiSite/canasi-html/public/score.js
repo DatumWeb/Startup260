@@ -11,13 +11,20 @@ function displayUsernames() {
 
 async function displayWinsAndLosses () {
     let wins = 0;
-    const responseWins = await fetch('/api/playerWins');
-    wins = await responseWins.json()
-    //const wins = localStorage.getItem("fakeWins");
     let losses = 0;
-    const responseLosses = await fetch('/api/Playerlosses');
+    try {
+        const responseWins = await fetch('/api/playerWins');
+        const winsData = await responseWins.json();
+        wins = winsData.wins;
 
-    losses = await responseLosses.json();
+        const responseLosses = await fetch('/api/playerLosses');
+        const lossesData = await responseLosses.json();
+        losses = lossesData.losses;
+    } catch (error) {
+        console.error('Error fetching wins or losses:', error);
+    }
+    
+
 
     
     document.getElementById("wins").innerText = wins;
