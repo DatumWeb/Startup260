@@ -24,6 +24,8 @@ numRows = 7;
 numColumns =7;
 playerOne = localStorage.getItem("username"); //database it
 playerTwo = null;
+winner = null;
+loser = null;
 
 
 class BabyCanasiBoard {
@@ -55,7 +57,7 @@ class BabyCanasiBoard {
         let x = Number(String(coords)[0]);
         let y = Number(String(coords)[1]);
         //placing tiles for turn zero logic
-        if(placingTiles == true && x > 3) {
+        if(placingTiles == true && x > 3 && winner == null) {
             //if statment to see if a piece is already there
             if (this.boardArray[x][y] == 0) {
                 if (piecesPlaced < 3) { //and player one, create another if statment for player 2 that is for the top three rows
@@ -94,7 +96,7 @@ class BabyCanasiBoard {
 
         }
 
-        if (moveTurn == true){
+        if (moveTurn == true && winner == null){
             if (selectingPiece == true) {
                 //console.log(this.boardArray[x][y].player);
                 //console.log(game.activePlayer);
@@ -115,9 +117,11 @@ class BabyCanasiBoard {
                         this.boardArray[x][y] = this.currentMovingPiece;
                         this.boardArray[this.oldLocation[0]][this.oldLocation[1]] = 0;
                         movingPiece = false;
-                        //placeIsWin();
-                        game.changePlayerTurn();
-                        game.nyktaTurn();
+
+                        if (winner == null){
+                            game.changePlayerTurn();
+                            game.nyktaTurn();
+                        }
                     //selectingPiece = true;
                     }
                 }
@@ -133,8 +137,11 @@ class BabyCanasiBoard {
                         this.boardArray[this.oldLocation[0]][this.oldLocation[1]] = 0;
                         movingPiece = false;
                         //placeIsWin();
-                        game.changePlayerTurn();
-                        game.nyktaTurn();
+
+                        if (winner == null){
+                            game.changePlayerTurn();
+                            game.nyktaTurn();
+                        }
                     }
                 }
 
@@ -228,12 +235,10 @@ class BabyCanasi {
     async checkIfWin() {
         let nyktaLocations = [];
         let playerLocations = [];
-        let winner = null;
-        let loser = null;
         //finds pieces and saves cords
         for (let i =  0; i < numColumns; i ++) {
             for (let j = 0; j < numRows; j++) {
-                if (board.boardArray[i][j] !== 0 && board.boardArray[i][j].player === "nykta") {
+                if (board.boardArray[i][j] instanceof BabyScrivtre && board.boardArray[i][j].player === "nykta") {
                     nyktaLocations.push([i,j]);
                 }
             }
@@ -242,7 +247,7 @@ class BabyCanasi {
         //finds pieces and saves cords
         for (let i =  0; i < numColumns; i ++) {
             for (let j = 0; j < numRows; j++) {
-                if (board.boardArray[i][j] !== 0 && board.boardArray[i][j].player === playerOne) {
+                if (board.boardArray[i][j] instanceof BabyScrivtre && board.boardArray[i][j].player === playerOne) {
                     playerLocations.push([i,j]);
                 }
             }
