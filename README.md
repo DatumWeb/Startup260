@@ -86,7 +86,7 @@ https://startup.canasigame.com
 
 ***Frontend served up using Express static middleware*** - Done
 
-***Calls to third party endpoints*** Calls quote generator and displays quote on login page, changes on refresh.
+***Calls to third party endpoints*** - Calls quote generator and displays quote on login page, changes on refresh.
 
 ***Backend service endpoints*** - Stores Player and their respective wins/losses on server.
 
