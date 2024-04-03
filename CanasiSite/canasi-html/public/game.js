@@ -118,10 +118,6 @@ class BabyCanasiBoard {
                         this.boardArray[this.oldLocation[0]][this.oldLocation[1]] = 0;
                         movingPiece = false;
 
-                        if (winner == null){
-                            game.changePlayerTurn();
-                            game.nyktaTurn();
-                        }
                     //selectingPiece = true;
                     }
                 }
@@ -138,15 +134,13 @@ class BabyCanasiBoard {
                         movingPiece = false;
                         //placeIsWin();
 
-                        if (winner == null){
-                            game.changePlayerTurn();
-                            game.nyktaTurn();
-                        }
                     }
                 }
 
             this.updateBoard();
             game.checkIfWin();
+            game.nyktaTurn();
+            this.updateBoard();
             //nytaTurn
             
 
@@ -329,6 +323,9 @@ class BabyCanasi {
 
     nyktaTurn() {
         //checks what pieces are still alive
+        if (winner != null){
+            return;
+        }
         let nyktaLocations = [];
 
         //finds pieces and saves cords
