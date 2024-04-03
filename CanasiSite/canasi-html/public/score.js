@@ -1,5 +1,7 @@
 //function getWins() {
 
+//const { response } = require("express");
+
 //function getLosses() {
     
 
@@ -10,16 +12,17 @@ function displayUsernames() {
 }
 
 async function displayWinsAndLosses () {
+    const yourUsername = localStorage.getItem("username");
     let wins = 0;
     let losses = 0;
     try {
-        const responseWins = await fetch('/api/playerWins');
-        const winsData = await responseWins.json();
-        wins = winsData.wins;
-
-        const responseLosses = await fetch('/api/playerLosses');
-        const lossesData = await responseLosses.json();
-        losses = lossesData.losses;
+        console.log(yourUsername)
+        const playerRecord = await fetch(`/api/playerRecord/${yourUsername}`)
+        const recordData = await playerRecord.json();
+        wins = recordData.wins;
+        losses = recordData.losses;
+        console.log(wins)
+        console.log(losses)
     } catch (error) {
         console.error('Error fetching wins or losses:', error);
     }

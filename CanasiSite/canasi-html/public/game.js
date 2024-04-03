@@ -122,9 +122,9 @@ class BabyCanasiBoard {
                     }
                 }
 
-                console.log(this.boardArray[x][y].player)
-                console.log(game.activePlayer)
-                console.log(this.boardArray[x][y])
+                //console.log(this.boardArray[x][y].player)
+                //console.log(game.activePlayer)
+                //console.log(this.boardArray[x][y])
                 if (this.boardArray[x][y] != 0 && this.boardArray[x][y].player != game.activePlayer) {
                     //if statment to check xy distance
                     if (Math.abs(this.oldLocation[0] - x)  < 4) {
@@ -258,26 +258,23 @@ class BabyCanasi {
         }
 
         if(winner !== null) {
+            let result;
+            if (winner === playerOne) {
+                result = 'win';
+            } else {
+                result = 'loss';
+            }
             //display winner add counter, end game
             alert(winner + " is the winner");
             try {
-                await fetch('api/playerWins', {
+                console.log("here")
+                await fetch('/api/playerResults', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json'},
-                    body: JSON.stringify({ username: winner, gameResult: 'win' })
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ username: winner, gameResult: result })
                 });
             } catch (error) {
-                console.error('Error adding win:', error);
-            }
-
-            try {
-                await fetch('api/playerLosses', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json'},
-                    body: JSON.stringify({ username: loser, gameResult: 'loss' })
-                });
-            } catch (error) {
-                console.error('Error adding loss:', error);
+                console.error('Error adding results:', error);
             }
         } 
         

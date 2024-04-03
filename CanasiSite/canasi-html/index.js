@@ -2,7 +2,7 @@
 //const bcrypt = require('bcrypt');
 const express = require('express');
 const app = express();
-const DB = require('./database.js');
+//const DB = require('./database.js');
 
 const authCookieName = 'token';
 
@@ -18,13 +18,7 @@ app.use(express.static('public'));
 
 
 // Return the application's default page if the path is unknown from simon
-app.use((_req, res) => {
-    res.sendFile('index.html', { root: 'public' });
-  });
-  
-  app.listen(port, () => {
-    console.log(`Listening on port ${port}`);
-  });
+
 
 // Router for service endpoints
 var apiRouter = express.Router();
@@ -33,22 +27,39 @@ app.use(`/api`, apiRouter);
 
 //Gets Wins and Losses
 let players = [
-    //{"username": { wins: 5, losses: 2}
+    {"username": { wins: 5, losses: 2}}
 ];
 
 //find()
-apiRouter.get('/playerWins/:user', (req, res) => {
+apiRouter.get('/playerWins', async(req, res) => {
     //res.json({wins: playerWins});
-    username = req.params.user;
-    res.json(players[username]);
+    console.log("here");
+    username = req.body.user;
+    res.send(players[username]);
 });
 
-apiRouter.post('/playerResults', (req, res) => {
+apiRouter.post('/playerResults', async(req, res) => {
     const { username, gameResult } = req.body;
     updateWinsLosses(username, gameResult);
     res.send();
 });
 
+apiRouter.get('/playerRecord/:username', async(req, res) => {
+    const username = req.params.username; 
+    const playerRecord = players[username]
+    console.log('playerRecord')
+    console.log(playerRecord);
+    
+    res.send(playerRecord);
+});
+
+app.use((_req, res) => {
+    res.sendFile('index.html', { root: 'public' });
+  });
+
+app.listen(port, () => {
+    console.log(`Listening on port ${port}`);
+  });
 //tracks wins and losses
 
 function updateWinsLosses(username, gameResult) {
@@ -62,6 +73,7 @@ function updateWinsLosses(username, gameResult) {
     } else if (gameResult == "loss") {
         players[username].losses++;
     }
+    console.log(players);
 
 }
 
