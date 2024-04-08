@@ -33,7 +33,7 @@ let players = [
 //find()
 apiRouter.get('/playerWins', async(req, res) => {
     //res.json({wins: playerWins});
-    console.log("here");
+
     username = req.body.user;
     res.send(players[username]);
 });
