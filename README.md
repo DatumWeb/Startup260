@@ -81,4 +81,16 @@ https://startup.canasigame.com
 
 ***TODO*** - Will finish game logic, and get rid of rough place holders when WebSocket is implimented.
 
+## Service deliverable
+***Node.js/Express HTTP service*** - Done
+
+***Frontend served up using Express static middleware*** - Done
+
+***Calls to third party endpoints*** - Calls quote generator and displays quote on login page, changes on refresh.
+
+***Backend service endpoints*** - Stores Player and their respective wins/losses on server.
+
+***Frontend calls service endpoints*** - Calls the endpoints to display info on players wins and losses on the score page.
+
+
 
