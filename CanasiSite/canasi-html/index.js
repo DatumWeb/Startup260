@@ -1,8 +1,9 @@
 //const cookieParser = require('cookie-parser');
 //const bcrypt = require('bcrypt');
 const express = require('express');
+const { createUser, updateUser, getUser } = require('./database');
 const app = express();
-//const DB = require('./database.js');
+
 
 const authCookieName = 'token';
 
@@ -12,19 +13,57 @@ app.use(express.json());
 
 app.use(express.static('public'));
 
-
-
-
-
-
-// Return the application's default page if the path is unknown from simon
-
-
 // Router for service endpoints
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
+// Get player record by username
+apiRouter.get('/playerRecord/:username', async (req, res) => {
+  const username = req.params.username;
+  try {
+    const playerRecord = await getUser(username);
+    if (!playerRecord) {
+      res.status(404).json({ error: 'Player not found' });
+      return;
+    }
+    res.json(playerRecord);
+  } catch (error) {
+    console.error('Error retrieving player record:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
 
+// Update player wins and losses
+apiRouter.post('/playerResults', async (req, res) => {
+  const { username, gameResult } = req.body;
+  try {
+    let playerRecord = await getUser(username);
+    if (!playerRecord) {
+      // Create new user if not found
+      playerRecord = await createUser({ username, password: '', wins: 0, losses: 0 });
+    }
+    // Update wins and losses
+    if (gameResult === 'win') {
+      playerRecord.wins++;
+    } else if (gameResult === 'loss') {
+      playerRecord.losses++;
+    }
+    await updateUser(playerRecord);
+    res.sendStatus(200);
+  } catch (error) {
+    console.error('Error updating player record:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+app.use((_req, res) => {
+  res.sendFile('index.html', { root: 'public' });
+});
+
+app.listen(port, () => {
+  console.log(`Listening on port ${port}`);
+});
+/*
 //Gets Wins and Losses
 let players = [
     {"username": { wins: 5, losses: 2}}
@@ -77,29 +116,5 @@ function updateWinsLosses(username, gameResult) {
 
 }
 
-// this might be better
-/* // Initial values for wins and losses
-let playerWins = 0;
-let playerLosses = 0;
 
-// Get player wins
-apiRouter.get('/playerWins', (_req, res) => {
-    res.json({ wins: playerWins });
-});
-
-// Get player losses
-apiRouter.get('/playerLosses', (_req, res) => {
-    res.json({ losses: playerLosses });
-});
-
-// Log game result (win/loss)
-apiRouter.post('/logResult', (req, res) => {
-    const { result } = req.body;
-    if (result === "win") {
-        playerWins++;
-    } else if (result === "loss") {
-        playerLosses++;
-    }
-    res.sendStatus(200);
-});*/
-
+*/

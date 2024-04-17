@@ -1,9 +1,9 @@
 const { MongoClient } = require('mongodb');
 const bcrypt = require('bcrypt');
 const config = require('./dbConfig.json');
-const uuid = require('uuid');
+//const uuid = require('uuid');
 
-const url = `mongodb+srv://${userName}:${password}@${hostname}/`
+const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}/`
 const client = new MongoClient(url);
 const db = client.db('startup');
 const usersCollection = db.collection('users');
