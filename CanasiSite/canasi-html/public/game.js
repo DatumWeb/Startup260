@@ -266,7 +266,6 @@ class BabyCanasi {
             //display winner add counter, end game
             alert(winner + " is the winner");
             try {
-                console.log("here")
                 await fetch('/api/playerResults', {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
@@ -275,6 +274,21 @@ class BabyCanasi {
             } catch (error) {
                 console.error('Error adding results:', error);
             }
+            
+
+
+            const loserResult = result === 'win' ? 'loss' : 'win'; // Reverse result for loser
+            try {
+                await fetch('/api/playerResults', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ username: loser, gameResult: loserResult })
+            });
+            } catch (error) {
+                console.error('Error adding results:', error);
+        }
+
+            
         } 
         
         //keep track of amount of wins

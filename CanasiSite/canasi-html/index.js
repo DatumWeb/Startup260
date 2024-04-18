@@ -47,7 +47,9 @@ apiRouter.post('/playerResults', async (req, res) => {
       playerRecord.wins++;
     } else if (gameResult === 'loss') {
       playerRecord.losses++;
+      console.log('Incrementing losses for user:', username);
     }
+    console.log('Updated player record:', playerRecord);
     await updateUser(playerRecord);
     res.sendStatus(200);
   } catch (error) {
