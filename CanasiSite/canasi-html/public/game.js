@@ -257,32 +257,23 @@ class BabyCanasi {
         }
 
         if(winner !== null) {
-            let result;
-            if (winner === playerOne) {
-                result = 'win';
-            } else {
-                result = 'loss';
-            }
             //display winner add counter, end game
             alert(winner + " is the winner");
             try {
                 await fetch('/api/playerResults', {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({ username: winner, gameResult: result })
+                    body: JSON.stringify({ username: winner, gameResult: "win" })
                 });
             } catch (error) {
                 console.error('Error adding results:', error);
             }
             
-
-
-            const loserResult = result === 'win' ? 'loss' : 'win'; // Reverse result for loser
             try {
                 await fetch('/api/playerResults', {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({ username: loser, gameResult: loserResult })
+                    body: JSON.stringify({ username: loser, gameResult: "loss" })
             });
             } catch (error) {
                 console.error('Error adding results:', error);
