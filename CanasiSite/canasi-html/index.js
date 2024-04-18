@@ -1,91 +1,27 @@
-const cookieParser = require('cookie-parser');
-const bcrypt = require('bcrypt');
+//const cookieParser = require('cookie-parser');
+//const bcrypt = require('bcrypt');
 const express = require('express');
-const DB = require('./database.js');
+const { createUser, updateUser, getUser } = require('./database');
 const app = express();
 
+
 const authCookieName = 'token';
-
-
 
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
 app.use(express.json());
-app.use(cookieParser());
 
 app.use(express.static('public'));
-
-app.set('trust proxy', true);
 
 // Router for service endpoints
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
-// CreateAuth token for a new user
-apiRouter.post('/auth/create', async (req, res) => {
-  if (await DB.getUser(req.body.username)) {
-    res.status(409).send({ msg: 'Existing user' });
-  } else {
-    const user = await DB.createUser(req.body.username, req.body.password);
-
-    // Set the cookie
-    setAuthCookie(res, user.token);
-
-    res.send({
-      id: user._id,
-    });
-  }
-});
-
-// GetAuth token for the provided credentials
-apiRouter.post('/auth/login', async (req, res) => {
-  const user = await DB.getUser(req.body.username);
-  if (user) {
-    if (await bcrypt.compare(req.body.password, user.password)) {
-      setAuthCookie(res, user.token);
-      res.send({ id: user._id });
-      return;
-    }
-  }
-  res.status(401).send({ msg: 'Unauthorized' });
-});
-
-// DeleteAuth token if stored in cookie
-apiRouter.delete('/auth/logout', (_req, res) => {
-  res.clearCookie(authCookieName);
-  res.status(204).end();
-});
-
-//gets info
-apiRouter.get('/user/:username', async (req, res) => {
-  const user = await DB.getUser(req.params.username);
-  if (user) {
-    const token = req?.cookies.token;
-    res.send({ username: user.username, authenticated: token === user.token, wins: user.wins, losses: user.losses});
-    return;
-  }
-  res.status(404).send({ msg: 'Unknown' });
-});
-
-// secureApiRouter verifies credentials for endpoints
-var secureApiRouter = express.Router();
-apiRouter.use(secureApiRouter);
-
-secureApiRouter.use(async (req, res, next) => {
-  authToken = req.cookies[authCookieName];
-  const user = await DB.getUserByToken(authToken);
-  if (user) {
-    next();
-  } else {
-    res.status(401).send({ msg: 'Unauthorized' });
-  }
-});
-
 // Get player record by username
 apiRouter.get('/playerRecord/:username', async (req, res) => {
   const username = req.params.username;
   try {
-    const playerRecord = await DB.getUser(username);
+    const playerRecord = await getUser(username);
     if (!playerRecord) {
       res.status(404).json({ error: 'Player not found' });
       return;
@@ -97,22 +33,14 @@ apiRouter.get('/playerRecord/:username', async (req, res) => {
   }
 });
 
-
-
-//////////////////
-
-// Apply the authentication middleware to relevant routes
-
-
-
 // Update player wins and losses
 apiRouter.post('/playerResults', async (req, res) => {
   const { username, gameResult } = req.body;
   try {
-    let playerRecord = await DB.getUser(username);
+    let playerRecord = await getUser(username);
     if (!playerRecord) {
       // Create new user if not found
-      playerRecord = await DB.createUser({ username, password: '', wins: 0, losses: 0 });
+      playerRecord = await createUser({ username, password: '', wins: 0, losses: 0 });
     }
     // Update wins and losses
     if (gameResult === 'win') {
@@ -122,7 +50,7 @@ apiRouter.post('/playerResults', async (req, res) => {
       console.log('Incrementing losses for user:', username);
     }
     console.log('Updated player record:', playerRecord);
-    await DB.updateUser(playerRecord);
+    await updateUser(playerRecord);
     res.sendStatus(200);
   } catch (error) {
     console.error('Error updating player record:', error);
@@ -133,15 +61,6 @@ apiRouter.post('/playerResults', async (req, res) => {
 app.use((_req, res) => {
   res.sendFile('index.html', { root: 'public' });
 });
-
-// setAuthCookie in the HTTP response
-function setAuthCookie(res, authToken) {
-  res.cookie(authCookieName, authToken, {
-    secure: true,
-    httpOnly: true,
-    sameSite: 'strict',
-  });
-}
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
