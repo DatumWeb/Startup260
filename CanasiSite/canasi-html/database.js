@@ -1,12 +1,13 @@
 const { MongoClient } = require('mongodb');
 const bcrypt = require('bcrypt');
 const config = require('./dbConfig.json');
-//const uuid = require('uuid');
+const uuid = require('uuid');
 
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}/`
 const client = new MongoClient(url);
 const db = client.db('startup');
 const usersCollection = db.collection('users');
+
 
 (async function testConnection() {
   await client.connect();
@@ -16,11 +17,14 @@ const usersCollection = db.collection('users');
   process.exit(1);
 });
 
-async function addUser(user) {
-  const result = await usersCollection.insertOne(user);
-  return result;
+
+function getUser(username) {
+  return usersCollection.findOne({ username: username})
 }
 
+function getUserByToken(token) {
+  return usersCollection.findOne({ token: token });
+}
 async function createUser(user) {
   // Hash the password before inserting it into the database
   const passwordHash = await bcrypt.hash(user.password, 10);
@@ -28,8 +32,9 @@ async function createUser(user) {
   const newUser = {
     username: user.username,
     password: passwordHash,
+    token: uuid.v4(),
     wins: 0, // Initial wins
-    losses: 0, // Initial losses
+    losses: 0 // Initial losses
   };
   
   await usersCollection.insertOne(newUser);
@@ -37,14 +42,6 @@ async function createUser(user) {
   return newUser;
 }
 
-function getUsers() {
-  const cursor = usersCollection.find();
-  return cursor.toArray();
-}
-
-function getUser(username) {
-  return usersCollection.findOne({ username: username });
-}
 
 async function updateUser(user) {
   const filter = { username: user.username };
@@ -56,10 +53,10 @@ async function updateUser(user) {
   return result;
 }
 
-module.exports = { 
-  addUser, 
-  getUsers, 
+module.exports = {   
   updateUser, 
   createUser,
   getUser,
+  getUserByToken,
+  
 };
