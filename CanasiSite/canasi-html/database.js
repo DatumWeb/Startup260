@@ -29,12 +29,23 @@ async function createUser(user) {
     username: user.username,
     password: passwordHash,
     wins: 0, // Initial wins
-    losses: 0, // Initial losses
+    losses: 0 // Initial losses
   };
   
   await usersCollection.insertOne(newUser);
 
   return newUser;
+}
+
+async function authenticateUser(username, password) {
+  const user = await getUser(username);
+  if (!user) {
+    return false; // User not found
+  }
+
+  // Compare hashed password with provided password
+  const isPasswordValid = await bcrypt.compare(password, user.password);
+  return isPasswordValid;
 }
 
 function getUsers() {

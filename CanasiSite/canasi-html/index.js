@@ -1,9 +1,9 @@
-//const cookieParser = require('cookie-parser');
-//const bcrypt = require('bcrypt');
+const cookieParser = require('cookie-parser');
 const express = require('express');
 const { createUser, updateUser, getUser } = require('./database');
 const app = express();
 
+app.use(cookieParser());
 
 const authCookieName = 'token';
 
@@ -13,9 +13,51 @@ app.use(express.json());
 
 app.use(express.static('public'));
 
+function authenticate(req, res, next) {
+  // Check if authentication cookie exists
+  if (req.cookies.authToken) {
+      // User is authenticated, allow access to the next middleware
+      next();
+  } else {
+      // User is not authenticated, send an error response
+      res.status(401).send('Unauthorized: You must sign in to access this page.');
+  }
+}
+
+// Apply the authentication middleware to relevant routes
+app.get('/game', authenticate, (req, res) => {
+  // Route handler for the game page
+  res.send('Welcome to the game page!');
+});
+
+app.get('/scores', authenticate, (req, res) => {
+  res.send('Here are the scores')
+})
+
+
+
+
+
+
+
 // Router for service endpoints
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
+
+
+app.get('/api/username', authenticate, async (req, res) => {
+  try {
+    const user = await getUser(req.user.username); // Assuming req.user contains the authenticated user details
+    if (!user) {
+      res.status(404).json({ error: 'User not found' });
+      return;
+    }
+    res.json({ username: user.username });
+  } catch (error) {
+    console.error('Error retrieving username:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
 
 // Get player record by username
 apiRouter.get('/playerRecord/:username', async (req, res) => {
@@ -31,6 +73,27 @@ apiRouter.get('/playerRecord/:username', async (req, res) => {
     console.error('Error retrieving player record:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
+});
+
+
+app.post('/login', async (req, res) => {
+  const { username, password } = req.body;
+
+  // Check if username and password are provided
+  if (!username || !password) {
+    return res.status(400).send('Username and password are required');
+  }
+
+  // Authenticate user
+  const isAuthenticated = await authenticateUser(username, password);
+  if (!isAuthenticated) {
+    return res.status(401).send('Invalid username or password');
+  }
+
+  // Set authentication cookie or token
+  const authToken = generateAuthToken(username); // Implement this function to generate a token
+  res.cookie(authCookieName, authToken, { httpOnly: true });
+  res.status(200).send('Login successful');
 });
 
 // Update player wins and losses
