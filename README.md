@@ -92,5 +92,16 @@ https://startup.canasigame.com
 
 ***Frontend calls service endpoints*** - Calls the endpoints to display info on players wins and losses on the score page.
 
+## Login deliverable
+***MongoDB Atlas database created*** - created and connected
 
+***Stores data in MongoDB*** - Stores player and their wins and losses in DB
+
+***User Registration*** - Allows the user to add a username to go by and stores everything under that.
+
+***Existing user*** - If name already exists they will log into that one.
+
+***User MongoDB to store credientials*** - Passwords get stored and hashed, user name gets stored
+
+***Restricts Functionality*** - N/A
 
